@@ -3,6 +3,7 @@ package models
 import (
 	"DataCertPhone/db_mysql"
 	"fmt"
+	//"time"
 )
 
 type UploadRecord struct {
@@ -12,7 +13,8 @@ type UploadRecord struct {
 	FileSize  int64
 	FileCert  string
 	FileTitle string
-	CertTime  string
+	CertTime  int64
+	CerTimeFormat string
 }
 
 
@@ -49,6 +51,9 @@ func QueryRecordsByUserId(userId int)([]UploadRecord,error)  {
 		if err != nil {
 			return nil,err
 		}
+		//t := time.Unix()
+		//t := time.Unix(record.CertTime,0)
+		// tStr := t.Format("2006年01月02日 15：04：05") // 2006/01/02 15：04：05
 		records = append(records, record)
 	}
 	return records,nil

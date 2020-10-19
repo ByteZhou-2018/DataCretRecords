@@ -38,7 +38,7 @@ func HASH(text string, hexType string, isHex bool) string {
 	case "ripemd160":
 		hashInstance = ripemd160.New()
 	}
-	if isHex { //如果传入的text 为十六进制 ，先hex。DecodeString()解码为arry再 write
+	if isHex { //如果传入的text 为十六进制，先hex。DecodeString()解码为arry再 write
 		arr, _ := hex.DecodeString(text)
 		hashInstance.Write(arr)
 

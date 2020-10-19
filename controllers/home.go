@@ -2,13 +2,9 @@ package controllers
 
 import (
 	"DataCertPhone/models"
-	"crypto/sha256"
-	"encoding/hex"
+	"DataCertPhone/utils"
 	"fmt"
 	"github.com/astaxie/beego"
-	"io"
-	"io/ioutil"
-	"os"
 	"strings"
 	"time"
 )
@@ -49,45 +45,45 @@ func (h *HomeController) Post() { //该post方法用于处理用户在客户端�
 		h.Ctx.WriteString("抱歉，文件大小超出范围，请上传符合要求的文件")
 		return
 	}
-
+	//保存文件
 	savePath := "static/upload" + "/" + header.Filename
-	savefile, err := os.OpenFile(savePath, os.O_CREATE|os.O_RDWR, 777)
+	_, err = utils.SaveFile(savePath, file)
 	if err != nil {
-		h.Ctx.WriteString("创建文件失败")
-		return
-	}
-	//使用 io包提供的方法保存文件
-	_, err = io.Copy(savefile, file) //length
-	if err != nil {
-		h.Ctx.WriteString("电子数据认证，请重新尝试！")
+		h.Ctx.WriteString("抱歉，文件数据认证失败，请重试！")
 		return
 	}
 	// hash256 加密  fielCert
-	hashinstance := sha256.New()
-	Filebytes, _ := ioutil.ReadAll(file)
-	hashinstance.Write(Filebytes)
-	bytes := hashinstance.Sum(nil)
-
-	//////////////////给结构体一个个赋值 /////////////////////////////////////
-	//UserId, err := uploadRecordThis.QueryUserId(models.User_this.Phone)
-	userId,err := models.QueryUserId(models.User_login.Phone)
+	//file, err = header.Open()
+	utils.OpenFile(savePath)
+	if err != nil {
+		h.Ctx.WriteString("抱歉，文件数据认证失败，请重试！")
+		return
+	}
+	sha256String, err := utils.SHA256HashReader(file)
 	if err != nil {
 		fmt.Println(err.Error())
 		fmt.Println("拿userId遇到错误")
 		h.Ctx.WriteString("拿useid出错，请重新尝试！")
 		return
 	}
-	//var uploadRecordThis models.UploadRecord{
-	//
-	//}
+	///在数据库中查询user id 然后把文件的信息全部存入到数据库的表中/////////
+	//UserId, err := uploadRecordThis.QueryUserId(models.User_this.Phone)
+	userId, err := models.QueryUserId(models.User_login.Phone)
+	if err != nil {
+		fmt.Println(err.Error())
+		fmt.Println("拿userId遇到错误")
+		h.Ctx.WriteString("拿useid出错，请重新尝试！")
+		return
+	}
+
 	uploadFileInfo := models.UploadRecord{
 		//Id:        userId,
 		UserId:    userId,
-		FileName: header.Filename,
+		FileName:  header.Filename,
 		FileSize:  header.Size,
-		FileCert:  hex.EncodeToString(bytes),
-		FileTitle:  title,
-		CertTime:  time.Now().String(),
+		FileCert:  sha256String,
+		FileTitle: title,
+		CertTime:  time.Now().Unix(),
 	}
 
 	//////////////////存入数据库 /////////////////////////////
@@ -100,7 +96,7 @@ func (h *HomeController) Post() { //该post方法用于处理用户在客户端�
 	}
 
 	////////////////////// 从数据库中读取该用户存储的所有文件记录/////////////////////////////////
-	records,err := models.QueryRecordsByUserId(userId)
+	records, err := models.QueryRecordsByUserId(userId)
 	if err != nil {
 		fmt.Println(err.Error())
 		h.Ctx.WriteString("电子数据认证信息获取失败,请稍后重试!")
@@ -108,36 +104,9 @@ func (h *HomeController) Post() { //该post方法用于处理用户在客户端�
 	}
 	h.Data["Records"] = records
 	h.TplName = "recordsList.html"
-		//h.Ctx.WriteString("电子数据认证成功")
+	//h.Ctx.WriteString("电子数据认证成功")
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //func (h *HomeController) Post() {
 //	//1、解析用户上传的数据及文件内容

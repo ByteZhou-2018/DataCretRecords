@@ -18,4 +18,5 @@ func init() {
 
     beego.Router("/records",&controllers.RecordsController{})
     //beego.Router("/home.html",&controllers.HomeController{})
+    beego.Router("/list",&controllers.ListController{})
 }
