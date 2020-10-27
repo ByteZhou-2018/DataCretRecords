@@ -5,7 +5,6 @@ import (
 	"DataCertPhone/db_mysql"
 	_ "DataCertPhone/routers"
 	"encoding/hex"
-	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"github.com/astaxie/beego"
@@ -31,11 +30,13 @@ fmt.Println(hex.EncodeToString(block0.Hash))
 //json: 序列化 ：json.Marshal 反序列化 ：json.UnMarshal
 //xml: 序列化 ：xml.Marshal 反序列化 ：xml.UnMarshal
 
-blockJson,_ := json.Marshal(block0)
+//blockJson,_ := json.Marshal(block0)
 blockXml,_ := xml.Marshal(block0)
-fmt.Println("序列化以后的block",string(blockJson))
+blockGob := block0.Serialize()
+fmt.Println("序列化以后的block",string(blockGob))
 fmt.Println("xml序列化以后的block",string(blockXml))
-
+//blockAsn1,_ :=asn1.Marshal(block0)
+//fmt.Println("ans1序列化后的block",string(blockAsn1))
 
 
 	beego.SetStaticPath("../static/css","./static/css")

@@ -26,6 +26,7 @@ func NewBlock(height int64, prevHash, data []byte) Block {
 		Version:   "0 x 01",
 	}
 	pow := NewPoW(block)
+
 	block.Hash, block.Nonce = pow.Run()
 	return block
 
@@ -72,7 +73,7 @@ func (b Block) Serialize()([]byte) {
 	return buff.Bytes()
 
 }
-//对区块进行序列化操作。。。
+//对区块进行反序列化操作。。。
 func Deserialize(data []byte) (*Block,error) {
 	//buff := new(bytes.Buffer) //缓冲区
 	//
@@ -81,7 +82,8 @@ func Deserialize(data []byte) (*Block,error) {
 	//return
 	var block Block
 	decoder := gob.NewDecoder(bytes.NewReader(data))
-	err := decoder.Decode(block)
+
+	err := decoder.Decode(block)//将decoder中的通过NewReader读取到数据通过Decode()方法解析成block类型
 	if err != nil {
 		return nil,err
 	}

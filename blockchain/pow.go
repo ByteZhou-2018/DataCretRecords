@@ -33,7 +33,6 @@ func (p ProofOfWork) Run() ([]byte, int64) {
 			BlockBytes, nonceBytes,
 		}, []byte{})
 		blockHash, _ = utils.SHA256HashByte(blockBytes)
-
 		target := p.Target
 		hashBig := new(big.Int)
 		hashBig = hashBig.SetBytes(blockHash)
