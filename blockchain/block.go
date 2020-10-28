@@ -64,6 +64,23 @@ func BlockToByte(block Block) ([]byte, error) {
 	//挖矿竞争，获得记账权
 	return blockBytes, nil
 }
+
+
+//序列化  ：将数据从内存中的形式转换为一种可以持久化存储在硬盘上或者在网络上传输的形式。称之为序列化
+//反序列		：将数据从文件中或网络中读取，然后转化到计算机内存中的过程
+//只有进行序列化以后的对象才能进行传输
+//序列化和反序列化有很多种方式：
+//json: 序列化 ：json.Marshal 反序列化 ：json.UnMarshal
+//xml: 序列化 ：xml.Marshal 反序列化 ：xml.UnMarshal
+
+//blockJson,_ := json.Marshal(block0)
+//blockXml,_ := xml.Marshal(block0)
+//blockGob := block0.Serialize()
+//fmt.Println("序列化以后的block",string(blockGob))
+//fmt.Println("xml序列化以后的block",string(blockXml))
+////blockAsn1,_ :=asn1.Marshal(block0)
+//fmt.Println("ans1序列化后的block",string(blockAsn1))
+
 //对区块进行序列化操作。。。
 func (b Block) Serialize()([]byte) {
 	buff := new(bytes.Buffer) //缓冲区
@@ -82,8 +99,7 @@ func Deserialize(data []byte) (*Block,error) {
 	//return
 	var block Block
 	decoder := gob.NewDecoder(bytes.NewReader(data))
-
-	err := decoder.Decode(block)//将decoder中的通过NewReader读取到数据通过Decode()方法解析成block类型
+	err := decoder.Decode(&block)//将decoder中的通过NewReader读取到数据通过Decode()方法解析成block类型
 	if err != nil {
 		return nil,err
 	}

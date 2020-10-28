@@ -4,6 +4,7 @@ import (
 	"DataCertPhone/utils"
 	"bytes"
 	"fmt"
+	"github.com/boltdb/bolt"
 	"math/big"
 )
 
@@ -43,4 +44,44 @@ func (p ProofOfWork) Run() ([]byte, int64) {
 		nonce++
 	}
 	return blockHash, nonce
+}
+func (bc BlockChain) Each2() ([]*Block, error) {
+	db := bc.BoltDB
+	var Blocks []*Block
+
+
+
+
+	db.Update(func(tx *bolt.Tx) error {
+		blocks := tx.Bucket([]byte(BUCKETBLOCKS))
+		if blocks == nil {
+			panic("获取桶对象失败！")
+		}
+
+		for {
+			//ThisBlockBytes := blocks.Get(bc.LastHash)
+			ThisBlockHash := blocks.Get(bc.LastHash) //hash值
+			//fmt.Printf("区块的hash值：%x\n", ThisBlockHash)
+			ThisBlockBytes := blocks.Get(ThisBlockHash) //区块的[]byte
+			fmt.Println(len(ThisBlockBytes))
+			ThisBlock, err := Deserialize(ThisBlockBytes)
+			if err != nil {
+				fmt.Println(err.Error())
+				break
+			}
+			Blocks = append(Blocks, ThisBlock)
+			//bc.LastHash = ThisBlock.PrevHash
+			//fmt.Println(ThisBlock == nil)
+			if bytes.Compare(ThisBlock.PrevHash, []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}) == 0 {
+				//ThisBlockBytes := blocks.Get(bc.LastHash)
+				//ThisBlock, _ := Deserialize(ThisBlockBytes)
+				//Blocks = append(Blocks, ThisBlock)
+				break
+			}
+			//把拿出来的区块 中的 prevHash ，作为key重新去查 上一个区块的[]byte
+			bc.LastHash = ThisBlock.PrevHash
+		}
+		return nil
+	})
+	return Blocks, nil
 }
