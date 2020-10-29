@@ -21,13 +21,13 @@ func (l *LoginController)Post()  {
 		l.TplName = "error.html"
 	}
 	fmt.Println(user.Phone,user.Password)
-	models.User_login,err = user.LoginUser()
+	user1,err := user.LoginUser()
 	if err != nil {
 		l.Data["Error"] = err.Error()
 		l.TplName = "error.html"
 		return
 	}
-	l.Data["Phone"] = models.User_login.Phone
+	l.Data["Phone"] = user1.Phone
 	l.TplName = "home.html"
 }
 

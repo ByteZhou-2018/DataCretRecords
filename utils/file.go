@@ -12,7 +12,7 @@ func OpenFile(filePath string)(io.Reader,error) {
 	return file,nil
 }
 func SaveFile(fileName string,file io.Reader) (int64,error) {
-	savefile, err := os.OpenFile(fileName, os.O_CREATE|os.O_RDWR, 777)
+	savefile, err := os.OpenFile(fileName, os.O_CREATE|os.O_RDWR, os.ModePerm)
 	if err != nil {
 
 		return -1,err

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	//"time"
 )
-
+var Records []UploadRecord
 type UploadRecord struct {
 	Id        int
 	UserId    int
@@ -56,5 +56,6 @@ func QueryRecordsByUserId(userId int)([]UploadRecord,error)  {
 		// tStr := t.Format("2006年01月02日 15：04：05") // 2006/01/02 15：04：05
 		records = append(records, record)
 	}
+	Records = records
 	return records,nil
 }

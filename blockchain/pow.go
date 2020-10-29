@@ -28,7 +28,7 @@ func (p ProofOfWork) Run() ([]byte, int64) {
 	BlockBytes, _ := BlockToByte(p.Block)
 	var blockHash []byte
 	for {
-		fmt.Println("当前尝试的nonce值", nonce)
+		//fmt.Println("当前尝试的nonce值", nonce)
 		nonceBytes, _ := utils.Int64ToByte(nonce)
 		blockBytes := bytes.Join([][]byte{
 			BlockBytes, nonceBytes,
@@ -53,7 +53,7 @@ func (bc BlockChain) Each2() ([]*Block, error) {
 
 
 	db.Update(func(tx *bolt.Tx) error {
-		blocks := tx.Bucket([]byte(BUCKETBLOCKS))
+		blocks := tx.Bucket([]byte(BUCKET_NAME))
 		if blocks == nil {
 			panic("获取桶对象失败！")
 		}

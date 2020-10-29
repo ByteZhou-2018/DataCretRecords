@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!-- saved from url=(0048)http://www.baoquan.com/attestations-list?lang=zh -->
 <html lang="zh_cn">
@@ -140,7 +139,8 @@
                                     <li class="message" style="position: relative;"><i class="toDoNumber">0</i><i
                                                 class="iconfont font-notic"></i>
                                         <div class="hover-notice"><p><!-- react-text: 332 -->当前你有
-                                                <!-- /react-text --><span class="number">0</span><!-- react-text: 334 -->
+                                                <!-- /react-text --><span class="number">0</span>
+                                                <!-- react-text: 334 -->
                                                 条未读消息<!-- /react-text --></p><a
                                                     href="http://www.baoquan.com/notifications?lang=zh"><span>查看消息</span></a>
                                         </div>
@@ -165,7 +165,8 @@
                     <div class="container-wrapper">
                         <div class="container member-container"><p class="table-name"><!-- react-text: 355 -->存证确权列表
                                 <!-- /react-text --><span class="price-tip"><!-- react-text: 357 -->（当前剩余存证容量
-                                    <!-- /react-text --><span class="count" style="color: rgb(254, 158, 0);">9.999636</span>
+                                    <!-- /react-text --><span class="count"
+                                                              style="color: rgb(254, 158, 0);">9.999636</span>
                                     <!-- react-text: 359 -->G<!-- /react-text --><a
                                             href="http://www.baoquan.com/capacity?productType=ATTESTATION&amp;lang=zh"><span
                                                 class="to-buy"
@@ -217,13 +218,14 @@
                                             <!-- /react-text -->
                                             <div class="el-select">
                                                 <div class="el-input"><i
-                                                            class="el-input__icon el-icon-caret-top"></i><input type="text"
-                                                                                                                value="全部文件类型"
-                                                                                                                placeholder="请选择"
-                                                                                                                name="name"
-                                                                                                                readonly=""
-                                                                                                                class="el-input__inner"
-                                                                                                                autocomplete="off">
+                                                            class="el-input__icon el-icon-caret-top"></i><input
+                                                            type="text"
+                                                            value="全部文件类型"
+                                                            placeholder="请选择"
+                                                            name="name"
+                                                            readonly=""
+                                                            class="el-input__inner"
+                                                            autocomplete="off">
                                                 </div>
                                                 <div class="el-select-dropdown"
                                                      style="min-width: 150px; display: none;">
@@ -361,7 +363,8 @@
                                                             <div class="cell"><!-- react-text: 478 -->存证时间
                                                                 <!-- /react-text --><span class="caret-wrapper"><i
                                                                             class="sort-caret ascending"></i><i
-                                                                            class="sort-caret descending"></i></span></div>
+                                                                            class="sort-caret descending"></i></span>
+                                                            </div>
                                                         </th>
                                                         <th colspan="1" rowspan="1"
                                                             class="el-table_6_column_41 is-leaf">
@@ -430,11 +433,31 @@
                                                                         <a
                                                                                 class="operate-blue"
                                                                                 href="http://www.baoquan.com/monitor/certificate/add?attId=81D5D8117C50443A9B7AC11471350720&amp;lang=zh">开启监测</a>
-                                                                        <a
-                                                                                target="_blank"
-                                                                                href="/cert_detail.html?cert_id={{.FileCert}}"
-                                                                                class="operate-blue"
-                                                                                style="color: rgb(84, 136, 249); margin: 0px 10px;"><span>查看证书</span></a>
+                                                                        {{/*                                                                        <a*/}}
+                                                                        {{/*                                                                                target="_blank"*/}}
+                                                                        {{/*                                                                                href="./certificate.html?cert_id={{.FileCert}}"*/}}
+                                                                        {{/*                                                                                href="/certificate"*/}}
+
+                                                                        <form action="/ShowCertificate" method="post">
+
+                                                                            <input hidden name="fileName"
+                                                                                   value="{{.FileName}}">
+                                                                            <input hidden name="fileSize"
+                                                                                   value="{{.FileSize}}">
+                                                                            <input hidden name="certTime"
+                                                                                   value="{{.CertTime}}">
+                                                                            <input hidden name="fileTitle"
+                                                                                   value="{{.FileTitle}}">
+                                                                            <input hidden name="fileCert"
+                                                                                   value="{{.FileCert}}">
+                                                                            <input hidden name="phone"
+                                                                                   value="{{$.Phone}}">
+                                                                            <a> <input type="submit" value="查看证书"
+                                                                                       style="cursor: pointer;color: #3a92d2;text-decoration: underline;border: none;background-color: transparent">
+                                                                            </a>
+                                                                        </form>
+                                                                        {{/*                                                                            <span>查看证书</span>*/}}
+                                                                        {{/*                                                                        </a>*/}}
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -457,14 +480,16 @@
                                                         class="el-pagination__total">共 1 条</span><span
                                                         class="el-pagination__sizes"><div class="el-select"><div
                                                                 class="el-input el-input--small"><i
-                                                                    class="el-input__icon el-icon-caret-top"></i><input type="text"
-                                                                                                                        value="20 条/页"
-                                                                                                                        placeholder="请选择"
-                                                                                                                        name="name"
-                                                                                                                        readonly=""
-                                                                                                                        class="el-input__inner"
-                                                                                                                        autocomplete="off"></div><div
-                                                                class="el-select-dropdown" style="min-width: 110px; display: none;"><div
+                                                                    class="el-input__icon el-icon-caret-top"></i><input
+                                                                    type="text"
+                                                                    value="20 条/页"
+                                                                    placeholder="请选择"
+                                                                    name="name"
+                                                                    readonly=""
+                                                                    class="el-input__inner"
+                                                                    autocomplete="off"></div><div
+                                                                class="el-select-dropdown"
+                                                                style="min-width: 110px; display: none;"><div
                                                                     class="el-scrollbar"><div
                                                                         class="el-select-dropdown__wrap el-scrollbar__wrap"
                                                                         style="margin-right: -15px; margin-bottom: -15px;"><ul
@@ -474,7 +499,8 @@
                                                                                 class="el-select-dropdown__item"><span>50 条/页</span></li><li
                                                                                 class="el-select-dropdown__item"><span>100 条/页</span></li><li
                                                                                 class="el-select-dropdown__item"><span>500 条/页</span></li><div
-                                                                                class="resize-triggers"><div class="expand-trigger"><div
+                                                                                class="resize-triggers"><div
+                                                                                    class="expand-trigger"><div
                                                                                         style="width: 1px; height: 1px;"></div></div><div
                                                                                     class="contract-trigger"></div></div></ul></div><div
                                                                         class="el-scrollbar__bar is-horizontal"><div
@@ -506,20 +532,23 @@
                     </div>
                 </div>
                 <footer class="user-center-footer"><p
-                            style="display: flex; align-items: center; justify-content: center;"><!-- react-text: 508 -->
+                            style="display: flex; align-items: center; justify-content: center;">
+                        <!-- react-text: 508 -->
                         Copyright&nbsp;©&nbsp;<!-- /react-text --><!-- react-text: 509 -->浙江数秦科技有限公司<!-- /react-text -->
                         <!-- react-text: 510 -->&nbsp;版权所有&nbsp;&nbsp;&nbsp;&nbsp;<!-- /react-text -->
                         <!-- react-text: 511 -->浙ICP备15025396号-1<!-- /react-text --><!-- react-text: 512 -->&nbsp;&nbsp;&nbsp;&nbsp;
                         <!-- /react-text --><a
                                 href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602007260"
-                                target="_blank" style="display: flex; align-items: center; color: rgb(102, 102, 102);"><img
+                                target="_blank"
+                                style="display: flex; align-items: center; color: rgb(102, 102, 102);"><img
                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAABjFBMVEVHcEzoxWzs04visWL++9725r7dpFXitWH89t337Lr52Ifov3f25qPcsX7gqlb06Zzu46rewXLlvHCdaFjvvl/crGrgvov387jz6ZLt3oDkvFnTk3DKhFvZr4LDfz7oxnzv2X//+dD/74ati3q0lH7Rrnbou1Doulr/1ljVPCLqv1fuzGbVHhjbSScFAWMAAXgBAW3ryFzksVHWj0nSBQnlmDpzd4Dpx2PdmEbrsEnw13TrwWDdn0U8GTzVazK5kVqYeljIIhDMAALKPSO9BA79xU3UxXXrXyNtf4/90GjqcDKRinm+TiUABn756XDepEz1x1f74mzVkjzThT3TLhyrq4LjrUr8lzlRNlHdhDX1fy6ZXzNdXG9NB0TXYTHQFg3XdTjyy27pgj69qXHekET/ulXBvIN0Y2HPuX+clYT2qjwZN5DuvlDx02nYnljNrFJWTm/JWSrZAAZgHlCxDg79KwoAG45pAjaEj5n9LRTEazOBWDqEaUriqVfbbTc2Gk2njVnOeDq1gD8ACJEMcLh/AAAAJnRSTlMA7JHrCGHK/hxBusIqreg9f/XQ+dLgnAKr4fQUXUic++xMvtHLbxvU4Y4AAAFpSURBVBjTY2CAAA5WFWVWDnEGJMDJKxxdXeMgzKuIEGOxt42ucvdiD7W1Z4GJcXBHOESZaOqahIdGcEFFeQTrY6J0dEJ04108zeoZecCC/N6+De4mIfHxmk7uaQbeYEEOEW/9Jt0iHU1NHSdNNwMzJZAbVLMyfe2jTAqDtFLivdwMMjUEgCrFTDOa0119nO0S6owD0/XTssSAKkUjE7MNfJJ0neM0veL0sq1MRYEq+RpTPfRLSuN8EpIqXQw8XIOBguK8Np4ZZbEljo6Ous7l+hme6kxAQe6UWs8KAz292GI9A30zDfYwbnEGcfk8Y9PEDAeP5PyYAjNtUwsjBaCZrOr+xnYBGhqulhp+GpHGRoacINezSmkFB2mrG6lr51oYazNyQsJN1NBQXcvQWlvLRt3KnI8fHKhcflbsRuph1moW/urq5n4SkNBkklILyLFUs9QKUDOXFICGvri0jBwbGx8zGzeTLFgIAGesR4U7iOtUAAAAAElFTkSuQmCC"
                                     alt="" style="width: 12px;"><!-- react-text: 515 -->&nbsp;浙公网安备&nbsp;33010602007260号
                             <!-- /react-text --></a></p></footer>
             </div>
             <span class="redux-toastr" aria-live="assertive"><span><div class="top-left"></div><div
                             class="top-right"></div><div class="top-center"></div><div class="bottom-left"></div><div
-                            class="bottom-right"></div><div class="bottom-center"></div></span></span><!-- react-text: 76 -->
+                            class="bottom-right"></div><div class="bottom-center"></div></span></span>
+            <!-- react-text: 76 -->
             <!-- /react-text --></div>
     </div>
 </div>
