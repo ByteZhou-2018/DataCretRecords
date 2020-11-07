@@ -20,6 +20,5 @@ func init() {
 //文件展示 页面 Get直接登录
     beego.Router("/list",&controllers.ListController{})//list?phonee=18379139021
     //查看证书
-    beego.Router("/certificate",&controllers.CertificateController{})
-    beego.Router("/ShowCertificate",&controllers.CertificateController{})
+    beego.Router("/certificate.html",&controllers.CertificateController{})
 }

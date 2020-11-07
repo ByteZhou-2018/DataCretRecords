@@ -100,6 +100,41 @@ func (bc *BlockChain) SaveData(data []byte) (Block, error) {
 	//返回值语句，newBlock，err，其中err可能包含错误信息
 	return newBlock, err
 }
+//该方法用于根据用户输入的认证号查询到对应的区块信息
+func (bc BlockChain)QueryBlockByCertId(cert_id string)(*Block,error)  {
+	db := bc.BoltDB
+	var err error
+	var block *Block
+	err = db.View(func(tx *bolt.Tx) error {
+		bucket := tx.Bucket([]byte(BUCKET_NAME))
+		if bucket == nil {
+			err = errors.New("查询链上数据发生错误，请重试！")
+			return err
+		}
+		eachHash := bc.LastHash
+		eachBig := new(big.Int)
+		zero := big.NewInt(0)
+		for {
+			eachBlockBytes := bucket.Get(eachHash)
+			eachBlock,err :=Deserialize(eachBlockBytes)
+			if err != nil {
+				return err
+			}
+			//将遍历到的区块中的数据跟用户提供的认证号进行比较
+			if string(eachBlock.Data) ==cert_id {
+				block = eachBlock
+				break
+			}
+			eachBig.SetBytes(eachBlock.PrevHash)
+			if eachBig.Cmp(zero) ==0 {
+				break
+			}
+			eachHash =eachBlock.PrevHash
+		}
+		return nil
+	})
+	return block,err
+}
 //func (bc *BlockChain) SaveData(data []byte) (Block, error) { //用户传入需要保存的数据 data
 //	//1、读取最新的区块
 //	db := bc.BoltDB

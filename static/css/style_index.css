@@ -1,0 +1,122 @@
+@charset "utf-8";
+* {
+	padding: 0;
+	margin: 0;
+	font-family: sans-serif kartika;
+}
+
+body {
+	background: url(../img/img8.jpg) no-repeat;
+	background-size: cover;
+	overflow: hidden;
+}
+
+.bigBox {
+	width: 400px;
+	padding: 30px;
+	text-align: center;
+	background: rgba(0, 0, 0, .5);
+	/*color: #D1AB93;*/
+	color: #fff;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	outline: none;
+	border-radius: 10px;
+	/*box-shadow: 10px 10px 5px #A1979B;*/
+	box-sizing: border-box;
+}
+
+h1 {
+	font-size: 20px;
+	color: #D1AB93;
+}
+
+.bigBox .inputText input {
+	height: 30px;
+	width: 66%;
+	padding: 0 5px;
+	margin: 10px auto 15px;
+	background: transparent;
+	border: none;
+	border-bottom: 1px #fff solid;
+	color: #D1AB93;
+}
+
+.bigBox input[type="checkbox"] {
+	/*vertical-align: text-top;*/
+	border-radius: 30%;
+	position: absolute;
+	top: 66%;
+	left: 24%;
+}
+
+.bigBox p {
+	font-size: 12px;
+	padding: 3px;
+	margin: 8px auto 12px;
+	letter-spacing: 1px;
+	/*vertical-align: middle;*/
+}
+
+.bigBox p a {
+	text-decoration: none;
+	color: #fff;
+}
+
+.bigBox p a:hover {
+	text-decoration: underline;
+	color: #D1AB93;
+}
+
+.bigBox input[type= "reset"],
+.bigBox input[type="submit"] {
+	width: 30%;
+	padding: 3px 15px;
+	margin: 10px 15px auto;
+	border: none;
+	border-radius: 10%;
+	font-size: 16px;
+	color: #fff;
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%), radial-gradient(at top center, rgba(255, 255, 255, 0.40) 0%, rgba(0, 0, 0, 0.40) 120%) #989898;
+	background-blend-mode: multiply, multiply;
+}
+
+.bigBox input[type="reset"]:hover,
+/*.bigBox button:hover,*/
+.bigBox input[type="submit"]:hover {
+	color: #D1AB93;
+	/*box-shadow: 5px 5px 5px #D1AB93;*/
+	box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, .05);
+	-webkit-box-shadow: #d4d2d2 0px 0px 10px;
+	-moz-box-shadow: #d4d2d2 0px 0px 10px;
+	background-image: url(../img/img8.jpg);
+	background-size: cover;
+	cursor: pointer;
+}
+
+
+/*
+ * 图标位置
+ */
+
+.iconfont {
+	color: white;
+	cursor: pointer;
+}
+
+.icon-iconfonteye {
+	position: absolute;
+	top: 47%;
+	left: 76%;
+	display: none;
+}
+.icon-iconfonteye:hover{
+	cursor: pointer;
+	color: #D1AB93;
+}
+
+#pwd:focus~label{
+	display: block;
+}

@@ -117,7 +117,7 @@
                                             <div class="hash-mob"
                                                  style="display: flex; align-items: center; flex-wrap: wrap;">
                                         <p style="color: rgb(19, 142, 254); overflow-wrap: break-word; word-break: normal; max-width: 100%; display: inline-block;">
-                                            88ef167864c4c92338e8eb05bd3cc4f750f14189b68c1a58050f32a5b1f4b34f</p><span><div
+                                            {{.CertId}}</p><span><div
                                                     class="el-popover" style="width: 320px; display: none;"><div
                                                         class="el-popover__title">存证文件HASH</div><div><p
                                                             style="color: rgb(51, 51, 51);">存证文件HASH是通过SHA256算法计算后得出的文件HASH值，与原始存证文件唯一对应。该HASH值将被实时写入保全链，确保文件的不可篡改</p></div><div
@@ -128,16 +128,16 @@
                                     <p class="block-chain-hash"><span>国密SM3的HASH</span>
                                         <div style="display: flex;">
                                     <p style="color: rgb(19, 142, 254); overflow-wrap: break-word; word-break: normal; max-width: 100%; display: inline-block;">
-                                        db14baba524dae1e84c4d4d3234ef006844be1c82a30b37e8169e1d4fa7bf609</p></div>
+                                        nb14qaqbcb4dae1e84c4d4d3234ef006844be1c82a30b37e8169e1d4fa7bf609</p></div>
                             </div>
                         </div>
                         <div class="block-chain-item"><span class="chain-name">VERAXCHAIN</span>
                             <div class="info"><p class="description">
-                                    该区块链是周大福电子数据认证平台基于Fabric架构定制开发，联合司法鉴定机构、公证处、知识产权局、司法厅等权威机构共同搭建的可信司法联盟链。</p>
+                                    该区块链是由电子数据认证平台基于Fabric架构定制开发，联合司法鉴定机构、公证处、知识产权局、司法厅等权威机构共同搭建的可信司法联盟链。</p>
                                 <p><span class="hash"><!-- react-text: 129 -->区块链哈希值<!-- /react-text -->
                                         <!-- react-text: 130 -->：<!-- /react-text --></span><a
                                             href="https://explorer.baoquan.com/browser/searchbyhash/e6479e1402473277550d588b6ffb88a1a6bd2f492981d899d12c03b0668fc268"
-                                            target="_blank"><span class="hash-code">e6479e1402473277550d588b6ffb88a1a6bd2f492981d899d12c03b0668fc268</span></a><span><div
+                                            target="_blank"><span class="hash-code">{{.BlockHash}}</span></a><span><div
                                                 class="el-popover" style="width: 320px; display: none;"><div
                                                     class="el-popover__title">区块链哈希值</div><div>
                                 <p style="color: rgb(51, 51, 51);">
@@ -176,7 +176,7 @@
                     <tbody>
                     <tr>
                         <td>保全人：</td>
-                        <td>周智杰&nbsp;</td>
+                        <td>{{.Phone}}&nbsp;</td>
                     </tr>
                     <tr>
                         <td>联系方式：</td>
@@ -188,7 +188,7 @@
                     </tr>
                     <tr>
                         <td>保全平台：</td>
-                        <td>周大福电子数据认证平台</td>
+                        <td>脸大电子数据认证平台</td>
                     </tr>
                     <tr>
                         <td>文件名称：</td>

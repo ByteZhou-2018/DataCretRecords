@@ -15,6 +15,8 @@ type Block struct {
 	Hash      []byte
 	Nonce     int64
 	Version   string
+	CertTimeFormat string // 仅作为格式化展示使用的字段
+
 }
 
 func NewBlock(height int64, prevHash, data []byte) Block {

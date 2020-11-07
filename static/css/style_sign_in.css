@@ -1,0 +1,98 @@
+@charset "utf-8";
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    background: url(../img/img8.jpg) no-repeat;
+    background-size: cover;
+    color: #757575;
+    font-family: sans-serif;
+    overflow: hidden;
+}
+
+#formBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 50px;
+    height: auto;
+    background: rgba(255, 255, 255, .6);
+    text-align: center;
+    border-radius: 0 10% 0 10%;
+}
+
+/*.sign_in_from input {*/
+/*    width: 66%;*/
+/*    height: 30px;*/
+/*    padding: 0 10px;*/
+/*    margin: 8px 12px;*/
+/*    background: transparent;*/
+/*    border: none;*/
+/*    border-bottom: 1px solid black;*/
+/*}*/
+
+/*.sign_in_from p input {*/
+
+/*    width: 16px;*/
+/*    height: 16px;*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*    vertical-align: text-bottom;*/
+/*}*/
+
+/*.sign_in_from p input[type="radio"] {*/
+/*    width: 20px;*/
+/*    height: 20px;*/
+/*    opacity: 0;*/
+/*}*/
+
+/*.sign_in_from p label {*/
+
+/*    width: 20px;*/
+/*    height: 20px;*/
+/*    border-radius: 50%;*/
+/*    border: 1px solid #999;*/
+/*}*/
+
+/*.sign_in_from p label[0]{*/
+/*    position: absolute*/
+/*;*/
+/*    top: 50%*/
+/*;*/
+/*    left: 50%*/
+/*;*/
+/*}*/
+/*.sign_in_from p label[1]*/
+/*{*/
+/*    position: absolute*/
+/*;*/
+/*    top: 50%*/
+/*;*/
+/*    left: 80%*/
+/*;*/
+/*}*/
+
+/*!*设置选中的input的样式*!*/
+/*!* + 是兄弟选择器,获取选中后的label元素*!*/
+/*.sign_in_from p input:checked + label {*/
+/*    background-color: #fe6d32;*/
+/*    border: 1px solid #fe6d32;*/
+/*}*/
+
+
+/*.sign_in_from #reset, .sign_in_from #submit {*/
+/*    width: 33%;*/
+/*    height: auto;*/
+/*    padding: 8px 10px;*/
+/*    cursor: pointer;*/
+/*    border: 1px solid black;*/
+/*    line-height: 16px;*/
+/*    border-radius: 15%;*/
+/*}*/
+
+/*.sign_in_from #reset:hover, .sign_in_from #submit:hover {*/
+/*    background-color: #fe6d32;*/
+/*}*/

@@ -420,7 +420,7 @@
                                                             </td>
                                                             <td class="el-table_6_column_40">
                                                                 <div class="cell"><span
-                                                                            title="2020/10/08 08:08:14">{{.CertTime}}</span>
+                                                                            title="2020/10/08 08:08:14">{{.CerTimeFormat}}</span>
                                                                 </div>
                                                             </td>
                                                             <td class="el-table_6_column_41">
@@ -433,31 +433,12 @@
                                                                         <a
                                                                                 class="operate-blue"
                                                                                 href="http://www.baoquan.com/monitor/certificate/add?attId=81D5D8117C50443A9B7AC11471350720&amp;lang=zh">开启监测</a>
-                                                                        {{/*                                                                        <a*/}}
-                                                                        {{/*                                                                                target="_blank"*/}}
-                                                                        {{/*                                                                                href="./certificate.html?cert_id={{.FileCert}}"*/}}
-                                                                        {{/*                                                                                href="/certificate"*/}}
+                                                                        <a
+                                                                                target="_blank"
+                                                                                href="./certificate.html?cert_id={{.FileCert}}&phone = {{$.Phone}}&fileName={{.FileName}}&fileTitle={{.FileTitle}}&fileSize={{.FileSize}}&certTime={{$.CertTimeFormat}}">
 
-                                                                        <form action="/ShowCertificate" method="post">
-
-                                                                            <input hidden name="fileName"
-                                                                                   value="{{.FileName}}">
-                                                                            <input hidden name="fileSize"
-                                                                                   value="{{.FileSize}}">
-                                                                            <input hidden name="certTime"
-                                                                                   value="{{.CertTime}}">
-                                                                            <input hidden name="fileTitle"
-                                                                                   value="{{.FileTitle}}">
-                                                                            <input hidden name="fileCert"
-                                                                                   value="{{.FileCert}}">
-                                                                            <input hidden name="phone"
-                                                                                   value="{{$.Phone}}">
-                                                                            <a> <input type="submit" value="查看证书"
-                                                                                       style="cursor: pointer;color: #3a92d2;text-decoration: underline;border: none;background-color: transparent">
-                                                                            </a>
-                                                                        </form>
-                                                                        {{/*                                                                            <span>查看证书</span>*/}}
-                                                                        {{/*                                                                        </a>*/}}
+                                                                        <span>查看证书</span>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
                                                             </td>

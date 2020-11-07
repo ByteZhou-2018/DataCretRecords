@@ -13,7 +13,8 @@ type ProofOfWork struct {
 	Block  Block
 }
 
-var Difficulty  uint= 10
+var Difficulty uint = 16
+
 func NewPoW(block Block) ProofOfWork {
 	t := big.NewInt(1)
 	t.Lsh(t, 255-Difficulty)
@@ -48,9 +49,6 @@ func (p ProofOfWork) Run() ([]byte, int64) {
 func (bc BlockChain) Each2() ([]*Block, error) {
 	db := bc.BoltDB
 	var Blocks []*Block
-
-
-
 
 	db.Update(func(tx *bolt.Tx) error {
 		blocks := tx.Bucket([]byte(BUCKET_NAME))

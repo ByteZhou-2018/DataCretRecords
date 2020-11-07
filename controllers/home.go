@@ -14,8 +14,10 @@ import (
 	"DataCertPhone/blockchain"
 	"DataCertPhone/models"
 	"DataCertPhone/utils"
+	"encoding/hex"
 	"fmt"
 	"github.com/astaxie/beego"
+	"github.com/boltdb/bolt"
 	"os"
 	"time"
 )
@@ -86,6 +88,7 @@ func (h *HomeController) Post() {
 		FileTitle: title,
 		CertTime:  time.Now().Unix(),
 	}
+
 	//② 保存认证数据到数据库中
 	_, err = record.AddFiles()//SaveRecord()
 	if err != nil {
@@ -94,11 +97,23 @@ func (h *HomeController) Post() {
 		return
 	}
 	//③保存数据到区块链上	blockchain.CHAIN.SaveData([]byte(md5String))
-	blockchain.CHAIN.SaveData([]byte(fileHash))
+	blockchain.CHAIN.SaveData([]byte(md5String))
 	blocks,_:=blockchain.CHAIN.QueryAllBlocks()//QueryAllBlocks()
 	for _, block := range blocks{
 		fmt.Printf("区块高度:%d,区块内数据:%s\n",block.Height,string(block.Data))
 	}
+
+	var thisBlock *blockchain.Block
+
+	blockchain.CHAIN.BoltDB.View(func(tx *bolt.Tx) error {
+		bucket:= tx.Bucket([]byte(blockchain.BUCKET_NAME))
+		thisBlockBytes := bucket.Get(blockchain.CHAIN.LastHash)
+		thisBlock,err = blockchain.Deserialize(thisBlockBytes)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
 	//上传文件保存到数据库中成功
 	records, err := models.QueryRecordsByUserId(user1.Id)
 	if err != nil {
@@ -106,6 +121,13 @@ func (h *HomeController) Post() {
 		h.Ctx.WriteString("抱歉, 获取电子数据列表失败, 请重新尝试!")
 		return
 	}
+	for _,v := range records {
+		fmt.Println(v.CerTimeFormat)
+	}
+	h.Data["BlockData"] = fileHash
+	h.Data["BlockHash"] = hex.EncodeToString(thisBlock.Hash)
+	h.Data["Block"] = thisBlock
+
 	h.Data["Records"] = records
 	h.Data["Phone"] = phone
 	h.TplName = "recordsList.html"
